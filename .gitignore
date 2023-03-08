@@ -1,15 +1,15 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
-/.pnp
-.pnp.js
+/react-hooks-jwt-auth/node_modules
+/react-hooks-jwt-auth/.pnp
+react-hooks-jwt-auth/.pnp.js
 
 # testing
-/coverage
+/react-hooks-jwt-auth/coverage
 
 # production
-/build
+/react-hooks-jwt-auth/build
 
 # misc
 .DS_Store
