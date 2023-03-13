@@ -1,33 +1,38 @@
-import React, { useState, useEffect } from "react";
-
-import UserService from "../services/user.service";
+import React, { useEffect , useState} from 'react';
+import UserService from '../services/user.service'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Table from 'react-bootstrap/Table'
+import { Link, NavLink } from 'react-router-dom';
+import AuthService from '../services/auth.service';
 
 const Home = () => {
-  const [content, setContent] = useState("");
 
-  useEffect(() => {
-    UserService.getPublicContent().then(
-      (response) => {
-        setContent(response.data);
-      },
-      (error) => {
-        const _content =
-          (error.response && error.response.data) ||
-          error.message ||
-          error.toString();
+    const [rests, setRests] = useState();
 
-        setContent(_content);
-      }
-    );
-  }, []);
+    useEffect(async () => {
+        const response = await UserService.getRest();
+        const list = response.data;
+        console.log(response.data);
+        setRests(list);
+        const refreshAccessToken = setInterval(AuthService.refreshToken, 400000);
+    }, []);
 
-  return (
-    <div className="container">
-      <header className="jumbotron">
-        <h3>{content}</h3>
-      </header>
-    </div>
-  );
+    return <Table striped bordered hover>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            {rests && rests.map(ele => <tr key={ele.id}>
+                <td>{ele.id}</td>
+                <td><Link to={"/menus"} state={{id:ele.id}} className="nav-link">{ele.username}</Link></td>
+            </tr>
+            )}
+        </tbody>
+    </Table>;
 };
+
 
 export default Home;

@@ -8,13 +8,16 @@ import AuthService from "./services/auth.service";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
-import Rest from "./components/Rest";
+import Rest from "./components/Home";
+import { Menus } from "./components/Menus";
+import User from "./components/User";
 
 import Profile from "./components/Profile";
 import {MyContext} from "./common/Contect"
 import PrivateRoute from './common/PrivateRoute';
 
 import EventBus from "./common/EventBus";
+import authHeader from "./services/auth-header";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -30,6 +33,7 @@ const App = () => {
       logOut();
     });
 
+    
     return () => {
       EventBus.remove("logout");
     };
@@ -40,12 +44,14 @@ const App = () => {
     setCurrentUser(undefined);
   };
 
+
+
   return (
     <MyContext.Provider value={{ currentUser, setCurrentUser}}>
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
           <Link to={"/"} className="navbar-brand">
-            bezKoder
+            Santhosh
           </Link>
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
@@ -54,20 +60,20 @@ const App = () => {
               </Link>
             </li>
 
-            {currentUser && (
+            {/* {currentUser && (
               <li className="nav-item">
                 <Link to={"/user"} className="nav-link">
                   User
                 </Link>
               </li>
-            )}
+            )} */}
           </div>
 
           {currentUser ? (
             <div className="navbar-nav ml-auto">
               <li className="nav-item">
                 <Link to={"/profile"} className="nav-link">
-                  {currentUser}
+                  Profile
                 </Link>
               </li>
               <li className="nav-item">
@@ -99,8 +105,8 @@ const App = () => {
             <Route path="/home" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/rest" element={<Rest />} />
-            <Route path="/details/*" element={<Rest />} />
+            <Route path="/menus/" element={<Menus />} />
+            <Route path="/profile" element={<User />} />
           </Routes>
         </div>
       </div>

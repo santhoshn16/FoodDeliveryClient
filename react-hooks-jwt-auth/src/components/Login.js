@@ -20,12 +20,10 @@ const required = (value) => {
 const Login = () => {
   const navigate = useNavigate();
   const { setCurrentUser, currentUser } = useContext(MyContext);
-
   useEffect(() => {
-
-    if (currentUser)
-      navigate('/rest');
-
+    if (currentUser){
+      navigate('/home');
+    }
   }, [currentUser]);
 
   const form = useRef();
@@ -57,7 +55,7 @@ const Login = () => {
         const user = data.user;
         if (user) {
           setCurrentUser(user);
-          navigate('/rest');
+          navigate('/home');
         }
       },
       (error) => {

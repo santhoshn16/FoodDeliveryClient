@@ -1,5 +1,6 @@
 import axios from "axios";
 import jwt from 'jsonwebtoken';
+import authHeader from "./auth-header";
 
 const API_URL = "http://localhost:8080/api/";
 
@@ -37,11 +38,29 @@ const getCurrentUser = () => {
   return JSON.parse(localStorage.getItem("user"));
 };
 
+const refreshToken = () => {
+  axios
+  .get(API_URL + 'refreshtoken', { headers: authHeader.refreshToken() })
+  .then((response) => {
+    // console.log(JSON.stringify(response.data));
+    console.log("jj");
+    localStorage.setItem("accesstoken", JSON.stringify(response.data.accesstoken));
+    localStorage.setItem("refreshtoken", JSON.stringify(response.data.refreshtoken));
+    localStorage.setItem("user", JSON.stringify(response.data.user));
+    console.log("Refresh Token Called");
+  }).catch(() => {
+    localStorage.removeItem("accesstoken");
+    localStorage.removeItem("refreshtoken");
+    localStorage.removeItem("user");
+  });
+}
+
 const AuthService = {
   register,
   login,
   logout,
   getCurrentUser,
+  refreshToken
 };
 
 export default AuthService;
