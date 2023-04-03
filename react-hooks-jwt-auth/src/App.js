@@ -4,11 +4,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 
 import AuthService from "./services/auth.service";
-
+import Logout from "./components/Logout";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
 import Rest from "./components/Home";
+import Game from "./components/Game";
 import { Menus } from "./components/Menus";
 import User from "./components/User";
 
@@ -18,6 +19,8 @@ import PrivateRoute from './common/PrivateRoute';
 
 import EventBus from "./common/EventBus";
 import authHeader from "./services/auth-header";
+import Game2 from "./components/game2/Game2";
+import Game3 from "./components/game3/Game3";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -60,6 +63,23 @@ const App = () => {
               </Link>
             </li>
 
+            <li className="nav-item">
+              <Link to={"/game1"} className="nav-link">
+                Game1
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link to={"/game2"} className="nav-link">
+                Game2
+              </Link>
+            </li>
+
+            <li className="nav-item">
+              <Link to={"/game3"} className="nav-link">
+                Game3
+              </Link>
+            </li>
             {/* {currentUser && (
               <li className="nav-item">
                 <Link to={"/user"} className="nav-link">
@@ -107,6 +127,10 @@ const App = () => {
             <Route path="/register" element={<Register />} />
             <Route path="/menus/" element={<Menus />} />
             <Route path="/profile" element={<User />} />
+            <Route path="/logout" element={<Logout />} />
+            <Route path="/game1" element={<Game />} />
+            <Route path="/game2" element={<Game2 />} />
+            <Route path="/game3" element={<Game3 />} />
           </Routes>
         </div>
       </div>

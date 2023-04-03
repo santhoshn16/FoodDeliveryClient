@@ -39,6 +39,9 @@ const updateProfile = (data) => {
   return axios.put(API_URL+ "update/profile", data, { headers: authHeader.setToken() , body: data } )
 }
 
+const deleteProfile = (data) => {
+  return axios.post(API_URL+ "user/delete/" + data, { headers: {'Access-Control-Allow-Origin': '*'}})
+}
 
 const UserService = {
   getPublicContent,
@@ -49,7 +52,8 @@ const UserService = {
   getMenu,
   removeAddress,
   addAddress,
-  updateProfile
+  updateProfile,
+  deleteProfile
 };
 
 export default UserService;

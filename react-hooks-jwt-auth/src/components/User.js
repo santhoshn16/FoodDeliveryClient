@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import UserService from '../services/user.service';
 import { useEffect } from 'react';
 import { Address } from './Address';
-
+import { useNavigate } from 'react-router-dom';
 import Table from 'react-bootstrap/Table';
+import AuthService from '../services/auth.service';
+import App from '../App';
+import Login from './Login';
 
 const User = props => {
     const [info, setInfo] = useState();
@@ -12,6 +15,7 @@ const User = props => {
     const [name, setName] = useState();
     const [username, setUsername] = useState();
     const [phone, setPhone] = useState();
+    const navigate = useNavigate();
 
     useEffect(async () => {
         const user = JSON.parse(localStorage.getItem('user'));
@@ -58,6 +62,16 @@ const User = props => {
         localStorage.setItem('user',JSON.stringify(list.username));
         setInfo(list);
     };
+
+    let lastContent;
+    const onDeleteHandler = async (e) => {
+        e.preventDefault();
+        const response = await UserService.deleteProfile(JSON.parse(localStorage.getItem('user')));
+        if (response.data === 'Successfully deleted user'){
+            lastContent = true;
+            navigate('/logout');
+        }
+    }
 
     let content =<form onSubmit={handleAddress}>
     <div className="form-group">
@@ -106,7 +120,9 @@ const User = props => {
             </Table>
             {form && content}
             {info && <><p>Roles Assigned</p> <ul>{info.roles.map(i => <li>{i.name}</li>)}</ul></>}
-            {info && <Address address={info.address} />}
+            {info && <Address address={info.address} />}<br></br>
+            <button onClick={onDeleteHandler} >Delete User</button>
+            {lastContent && <p>Successfully deleted </p>}
         </>
     );
 

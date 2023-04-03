@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import Form from "react-validation/build/form";
 import Input from "react-validation/build/input";
 import CheckButton from "react-validation/build/button";
-import { isEmail } from "validator";
+import { useNavigate } from "react-router-dom";
 
 import AuthService from "../services/auth.service";
 
@@ -16,11 +16,11 @@ const required = (value) => {
   }
 };
 
-const validEmail = (value) => {
-  if (!isEmail(value)) {
+const validPhone = (value) => {
+  if ( value.length !== 10) {
     return (
       <div className="alert alert-danger" role="alert">
-        This is not a valid email.
+        This is not a valid phone.
       </div>
     );
   }
@@ -31,6 +31,16 @@ const vusername = (value) => {
     return (
       <div className="alert alert-danger" role="alert">
         The username must be between 3 and 20 characters.
+      </div>
+    );
+  }
+};
+
+const vname = (value) => {
+  if (value.length < 3 || value.length > 25) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        The username must be between 3 and 25 characters and should be your name
       </div>
     );
   }
@@ -49,9 +59,10 @@ const vpassword = (value) => {
 const Register = () => {
   const form = useRef();
   const checkBtn = useRef();
-
+  const navigate = useNavigate();
   const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
   const [successful, setSuccessful] = useState(false);
   const [message, setMessage] = useState("");
@@ -61,9 +72,14 @@ const Register = () => {
     setUsername(username);
   };
 
-  const onChangeEmail = (e) => {
-    const email = e.target.value;
-    setEmail(email);
+  const onChangeName = (e) => {
+    const name = e.target.value;
+    setName(name);
+  }
+
+  const onChangePhone = (e) => {
+    const phone = e.target.value;
+    setPhone(phone);
   };
 
   const onChangePassword = (e) => {
@@ -80,10 +96,13 @@ const Register = () => {
     form.current.validateAll();
 
     if (checkBtn.current.context._errors.length === 0) {
-      AuthService.register(username, email, password).then(
+      AuthService.register(name, username, password, phone).then(
         (response) => {
-          setMessage(response.data.message);
+          setMessage("Successful Registration");
           setSuccessful(true);
+          setTimeout(() => {
+            navigate('/login'); 
+        }, 5000); 
         },
         (error) => {
           const resMessage =
@@ -125,14 +144,26 @@ const Register = () => {
               </div>
 
               <div className="form-group">
-                <label htmlFor="email">Email</label>
+                <label htmlFor="name">Name</label>
                 <Input
                   type="text"
                   className="form-control"
-                  name="email"
-                  value={email}
-                  onChange={onChangeEmail}
-                  validations={[required, validEmail]}
+                  name="name"
+                  value={name}
+                  onChange={onChangeName}
+                  validations={[required, vname]}
+                />
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="phone">Phone</label>
+                <Input
+                  type="number"
+                  className="form-control"
+                  name="phone"
+                  value={phone}
+                  onChange={onChangePhone}
+                  validations={[required, validPhone]}
                 />
               </div>
 
