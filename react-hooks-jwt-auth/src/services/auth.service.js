@@ -1,7 +1,7 @@
 import axios from "axios";
 import authHeader from "./auth-header";
 
-const API_URL = "http://54.175.99.206:8080/api/";
+const API_URL = "http://52.90.2.227:8080/api/";
 
 const register = (name, username, password, phone_number) => {
   return axios.post(API_URL + "user/save", {
