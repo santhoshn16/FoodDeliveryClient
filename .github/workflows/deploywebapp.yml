@@ -15,7 +15,7 @@ jobs:
       - name: Install dependencies
         run: npm --prefix react-hooks-jwt-auth/ install
       - name: Build the app
-        run: npm run build
+        run: npm --prefix react-hooks-jwt-auth/ run build
       - name: Deploy to S3
         env:
           AWS_REGION: us-east-2
