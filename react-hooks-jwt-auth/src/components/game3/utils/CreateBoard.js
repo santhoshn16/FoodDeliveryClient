@@ -95,7 +95,7 @@ const CreateBoard = (row, col) => {
             subcol.push({src:"./images/2D.png",value:"2D", x:x, y:2, taken:false, player:null});
             subcol.push({src:"./images/6C.png",value:"6C", x:x, y:3, taken:false, player:null});
             subcol.push({src:"./images/7C.png",value:"7C", x:x, y:4, taken:false, player:null});
-            subcol.push({src:"./images/9C.png",value:"9C", x:x, y:5, taken:false, player:null});
+            subcol.push({src:"./images/8C.png",value:"8C", x:x, y:5, taken:false, player:null});
             subcol.push({src:"./images/9C.png",value:"9C", x:x, y:6, taken:false, player:null});
             subcol.push({src:"./images/10C.png",value:"10C", x:x, y:7, taken:false, player:null});
             subcol.push({src:"./images/6S.png",value:"6S", x:x, y:8, taken:false, player:null});

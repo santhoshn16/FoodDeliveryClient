@@ -2,7 +2,7 @@ import axios from "axios";
 import jwt from 'jsonwebtoken';
 import authHeader from "./auth-header";
 
-const API_URL = "http://localhost:8080/api/";
+const API_URL = "http://54.175.99.206:8080/api/";
 
 const register = (name, username, password, phone_number) => {
   return axios.post(API_URL + "user/save", {
