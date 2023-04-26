@@ -10,7 +10,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
-          repository: santhoshn16/portfolio
+          repository: santhoshn16/FoodDeliveryWebApp
           ref: main
       - name: Install dependencies
         run: npm install
@@ -23,4 +23,4 @@ jobs:
         run: |
           aws configure set aws_access_key_id ${{ secrets.ACCESS_ID_KEY }}
           aws configure set aws_secret_access_key ${{ secrets.ACCESS_KEY }}
-          aws s3 sync build/ s3://portfolio-santhosh
+          aws s3 sync ./react-hooks-jwt-auth/build/ s3://allinonegames
