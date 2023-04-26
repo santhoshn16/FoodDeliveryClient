@@ -12,8 +12,10 @@ jobs:
         with:
           repository: santhoshn16/FoodDeliveryWebApp
           ref: main
+      - name: Install dependencies
+        run: npm --prefix react-hooks-jwt-auth/ install
       - name: Build the app
-        run: npm --prefix react-hooks-jwt-auth/ run build
+        run: npm run build
       - name: Deploy to S3
         env:
           AWS_REGION: us-east-2
