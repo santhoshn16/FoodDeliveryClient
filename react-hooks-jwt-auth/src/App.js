@@ -8,17 +8,12 @@ import Logout from "./components/Logout";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Home from "./components/Home";
-import Rest from "./components/Home";
 import Game from "./components/Game";
 import { Menus } from "./components/Menus";
 import User from "./components/User";
-
-import Profile from "./components/Profile";
 import {MyContext} from "./common/Contect"
-import PrivateRoute from './common/PrivateRoute';
 
 import EventBus from "./common/EventBus";
-import authHeader from "./services/auth-header";
 import Game2 from "./components/game2/Game2";
 import Game3 from "./components/game3/Game3";
 

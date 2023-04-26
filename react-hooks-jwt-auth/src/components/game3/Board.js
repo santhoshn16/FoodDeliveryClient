@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Cell from './Cell';
-import santhosh from './images/santhosh.jpg'
-import CreateBoard from './utils/CreateBoard';
+import CreateBoard from './CreateBoard';
 import InitializeCards from './utils/InitializeCards';
 import GetNewCard from './utils/GetNewCard';
 const style = {

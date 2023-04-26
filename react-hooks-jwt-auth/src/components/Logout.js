@@ -13,7 +13,7 @@ const Logout = () => {
             setCurrentUser(undefined);
             navigate('/login');
         }, 3000);
-    }, []);
+    }, [navigate, setCurrentUser]);
 
     return <div>User Successfully Logged Out</div>;
 };

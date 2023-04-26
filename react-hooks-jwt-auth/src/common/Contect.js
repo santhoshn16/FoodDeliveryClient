@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 // Create the context
 export  const MyContext = React.createContext();

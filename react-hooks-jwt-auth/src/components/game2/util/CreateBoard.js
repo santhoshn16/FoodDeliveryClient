@@ -1,4 +1,3 @@
-import React from 'react';
 
 const CreateBoard = (row, col, mines) => {
     let board = [];

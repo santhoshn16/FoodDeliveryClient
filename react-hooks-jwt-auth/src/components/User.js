@@ -4,9 +4,6 @@ import { useEffect } from 'react';
 import { Address } from './Address';
 import { useNavigate } from 'react-router-dom';
 import Table from 'react-bootstrap/Table';
-import AuthService from '../services/auth.service';
-import App from '../App';
-import Login from './Login';
 
 const User = props => {
     const [info, setInfo] = useState();
@@ -17,11 +14,14 @@ const User = props => {
     const [phone, setPhone] = useState();
     const navigate = useNavigate();
 
-    useEffect(async () => {
-        const user = JSON.parse(localStorage.getItem('user'));
-        const response = await UserService.getUser(user);
-        const list = response.data;
-        setInfo(list);
+    useEffect(() => {
+        async function f() {
+            const user = JSON.parse(localStorage.getItem('user'));
+            const response = await UserService.getUser(user);
+            const list = response.data;
+            setInfo(list);
+        }
+        f();
     }, []);
 
     const onEditHandler = () => {
@@ -50,16 +50,16 @@ const User = props => {
     const handleAddress = async (event) => {
         event.preventDefault();
         const editedData = {
-            'id':id,
-            'name':name,
-            'username':username,
-            'phone_number':phone
+            'id': id,
+            'name': name,
+            'username': username,
+            'phone_number': phone
         }
         console.log(editedData);
         setForm(false);
         const response = await UserService.updateProfile(editedData);
         const list = response.data;
-        localStorage.setItem('user',JSON.stringify(list.username));
+        localStorage.setItem('user', JSON.stringify(list.username));
         setInfo(list);
     };
 
@@ -67,33 +67,33 @@ const User = props => {
     const onDeleteHandler = async (e) => {
         e.preventDefault();
         const response = await UserService.deleteProfile(JSON.parse(localStorage.getItem('user')));
-        if (response.data === 'Successfully deleted user'){
+        if (response.data === 'Successfully deleted user') {
             lastContent = true;
             navigate('/logout');
         }
     }
 
-    let content =<form onSubmit={handleAddress}>
-    <div className="form-group">
-      <label htmlFor="name">Name</label>
-      <input type="text" className="form-control" name="name" defaultValue={name} onChange={onNameChange}/>
-    </div>
+    let content = <form onSubmit={handleAddress}>
+        <div className="form-group">
+            <label htmlFor="name">Name</label>
+            <input type="text" className="form-control" name="name" defaultValue={name} onChange={onNameChange} />
+        </div>
 
-    <div className="form-group">
-      <label htmlFor="username">Username</label>
-      <input type="text" className="form-control" name="username" defaultValue={username} onChange={onUserChange} />
-    </div>
+        <div className="form-group">
+            <label htmlFor="username">Username</label>
+            <input type="text" className="form-control" name="username" defaultValue={username} onChange={onUserChange} />
+        </div>
 
-    <div className="form-group">
-      <label htmlFor="phone">Phone</label>
-      <input type="number" className="form-control" name="phone" defaultValue={phone} onChange={onPhoneChange} />
-    </div>
+        <div className="form-group">
+            <label htmlFor="phone">Phone</label>
+            <input type="number" className="form-control" name="phone" defaultValue={phone} onChange={onPhoneChange} />
+        </div>
 
-    <div className="form-group">
-      <button className="btn btn-primary btn-block">Change</button>
-    </div>
-  </form> 
-    ;
+        <div className="form-group">
+            <button className="btn btn-primary btn-block">Change</button>
+        </div>
+    </form>
+        ;
 
     return (
         <>

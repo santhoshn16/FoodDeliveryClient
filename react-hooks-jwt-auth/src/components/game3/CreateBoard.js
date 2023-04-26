@@ -1,5 +1,3 @@
-import React from 'react';
-
 
 const CreateBoard = (row, col) => {
     let sequence = [];

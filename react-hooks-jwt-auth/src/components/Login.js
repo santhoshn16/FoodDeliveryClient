@@ -24,7 +24,7 @@ const Login = () => {
     if (currentUser){
       navigate('/home');
     }
-  }, [currentUser]);
+  }, [currentUser, navigate]);
 
   const form = useRef();
   const checkBtn = useRef();

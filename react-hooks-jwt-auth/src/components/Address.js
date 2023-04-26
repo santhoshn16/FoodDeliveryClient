@@ -13,8 +13,7 @@ const Address = props => {
 
     useEffect(()=>{
         setAddress(props.address);
-    },[setAddress,setUser]);
-    //console.log(props.address);
+    },[setAddress,setUser, props.address]);
 
     const onRemoveHandler = async (id) => {
         

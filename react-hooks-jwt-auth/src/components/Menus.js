@@ -5,7 +5,6 @@ import UserService from '../services/user.service';
 
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import Rest from './Home';
 import MenuItem from './MenuItem';
 
 const Menus = props => {
@@ -13,12 +12,15 @@ const Menus = props => {
     const {id} = location.state;
     const [info, setInfo] = useState();
 
-    useEffect(async () => {
+    useEffect(() => {
+      async function v(){
         const response = await UserService.getMenu(id);
         const list = response.data;
         //console.log(response.data);
         setInfo(list);
-    }, [setInfo]);
+    }
+    v();
+  }, [setInfo, id]);
 
 
     return (
