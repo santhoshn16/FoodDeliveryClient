@@ -32,7 +32,7 @@ const Cell = ({details, selectedCard}, ) => {
     return (
         <div style={style.cellStyle} onClick={photoClicked} >
             <img src={require(`${details.src}`)} height={55} style={style.image1} width={85} alt='imagess'/>
-            {details.taken && <img src={require(`${details.taken}`).default} height={20} style={style.image2} width={40} alt='imagesss'/>}
+            {details.taken && <img src={require(`${details.taken}`)} height={20} style={style.image2} width={40} alt='imagesss'/>}
         </div>
     )
 };
