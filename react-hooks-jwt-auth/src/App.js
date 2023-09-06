@@ -13,6 +13,7 @@ import User from "./components/User";
 import {MyContext} from "./common/Contect"
 
 import EventBus from "./common/EventBus";
+import AddRestaurant from "./components/AddRestaurant";
 
 const App = () => {
   const [currentUser, setCurrentUser] = useState(undefined);
@@ -104,6 +105,7 @@ const App = () => {
             <Route path="/menus/" element={<Menus />} />
             <Route path="/profile" element={<User />} />
             <Route path="/logout" element={<Logout />} />
+            <Route path="/addrestaurant" element={<AddRestaurant/>} />
           </Routes>
         </div>
       </div>
